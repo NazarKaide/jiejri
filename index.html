@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТЕПЛО — Простір Твого Затишку</title>
+    <style>
+        /* Палітра кольорів на основі логотипу */
+        :root {
+            --bg-color: #f7e6d4;      /* Бежевий фон */
+            --primary: #2b4231;       /* Темно-зелений */
+            --primary-dark: #1e3023;  /* Глибокий зелений */
+            --accent: #d9a05b;        /* Теплий золотаво-коричневий */
+            --text: #2c2c2c;          /* Колір тексту */
+            --white: #ffffff;
+            --card-bg: #fdfaf6;       /* Світлий колір для карток */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            padding-top: 70px;
+        }
+
+        /* Контейнер для центрування контенту */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- ШАПКА ТА НАВІГАЦІЯ --- */
+        header {
+            background-color: rgba(247, 230, 212, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(43, 66, 49, 0.08);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo img {
+            height: 50px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+
+        /* Бургер-меню для мобільних */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* --- ГОЛОВНИЙ БАНЕР --- */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            color: #4a4a4a;
+        }
+
+        /* --- СЕКЦІЯ ПЕРЕВАГ --- */
+        .features {
+            background-color: var(--card-bg);
+            padding: 60px 0;
+            border-radius: 24px;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* --- ЗАГАЛЬНІ ЗАГОЛОВКИ СЕКЦІЙ --- */
+        .section-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 12px auto 0;
+        }
+
+        /* --- МЕНЮ ТОВАРІВ --- */
+        .menu-section {
+            padding: 40px 0 80px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(43, 66, 49, 0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(43, 66, 49, 0.1);
+        }
+
+        .product-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .product-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* --- КНОПКИ --- */
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover { background-color: var(--primary-dark); }
+        .btn:active { transform: scale(0.98); }
+
+        /* --- ПРО НАС --- */
+        .about-section {
+            padding: 60px 0;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 24px;
+            margin-bottom: 60px;
+        }
+        .about-section .section-title { color: var(--white); }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* --- МОДАЛЬНЕ ВІКНО / ОФОРМЛЕННЯ ТА ОПЛАТА --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(30, 48, 35, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+        }
+        .close-modal:hover { color: var(--primary); }
+
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #fafafa;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+        }
+
+        /* Блок оплати картою */
+        .payment-box {
+            background-color: #fcfbf9;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px dashed var(--accent);
+            margin: 20px 0;
+        }
+
+        .payment-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .card-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* --- ПІДВАЛ (FOOTER) --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #c4d1c8;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer p { margin-bottom: 10px; }
+
+        /* ==========================================================================
+           МЕДІА-ЗАПИТИ ДЛЯ ПОВНОЇ АДАПТИВНОСТІ (Responsive Design)
+           ========================================================================== */
+        
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.6rem; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 60px; header { height: 60px; } }
+            
+            .burger { display: flex; }
+
+            /* Перетворення меню на висувну панель на мобільних */
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background-color: var(--bg-color);
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+                transition: 0.4s ease-in-out;
+                box-shadow: inset 0 10px 15px rgba(0,0,0,0.02);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.4rem;
+            }
+
+            /* Анімація іконки бургера */
+            .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+            .burger.toggle .line2 { opacity: 0; }
+            .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+            .hero h1 { font-size: 2.1rem; }
+            .hero p { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
+            .products-grid { grid-template-columns: 1fr; }
+            .card-row { flex-direction: column; gap: 0; }
+            .modal-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="logo.jpg" alt="ТЕПЛО Лого">
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#menu" onclick="closeMenu()">Меню</a>
+                <a href="#about" onclick="closeMenu()">Про простір</a>
+                <a href="#advantages" onclick="closeMenu()">Чому ми</a>
+            </nav>
+            <button class="burger" id="burgerBtn" onclick="toggleMenu()">
+                <span class="line1"></span>
+                <span class="line2"></span>
+                <span class="line3"></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>ПРОСТІР, ДЕ НАРОДЖУЄТЬСЯ ТЕПЛО</h1>
+            <p>Затишна кав’ярня у твоєму смартфоні. Замовляй свіжообсмажену каву, гарячі напої та крафтову випічку в кілька кліків.</p>
+            <a href="#menu" class="btn" style="text-decoration: none; display: inline-block;">Відкрити Меню</a>
+        </div>
+    </section>
+
+    <section class="container features" id="advantages">
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>☀️ Завжди гаряче</h3>
+                <p>Пакуємо у спеціальні термоізоляційні холдери, щоб зберегти температуру.</p>
+            </div>
+            <div class="feature-item">
+                <h3>🌱 100% Арабіка</h3>
+                <p>Використовуємо лише спешелті зерно свіжого локального обсмажування.</p>
+            </div>
+            <div class="feature-item">
+                <h3>⚡️ Швидка оплата</h3>
+                <p>Безпечна миттєва онлайн-оплата карткою просто під час замовлення.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container menu-section" id="menu">
+        <h2 class="section-title">Наше Меню</h2>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-info">
+                    <h3 class="product-title">Класичний Капучино</h3>
+                    <p class="product-desc">Густа оксамитова молочна пінка, подвійний еспресо з нотками шоколаду та горіхів. 300 мл.</p>
+                    <div class="product-meta">
+                        <span class="product-price">65 грн</span>
+                        <button class="btn" onclick="openOrder('Класичний Капучино', 65)">Купити</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3 class="product-title">Фірмовий Раф «Тепло»</h3>
+                    <p class="product-desc">Ніжні збиті вершки, еспресо та наш секретний сироп із додаванням натуральної лаванди. 350 мл.</p>
+                    <div class="product-meta">
+                        <span class="product-price">85_грн</span>
+                        <button class="btn" onclick="openOrder('Фірмовий Раф «Тепло»', 85)">Купити</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3 class="product-title">Мигдалевий Круасан</h3>
+                    <p class="product-desc">Класичний французький круасан на вершковому маслі з великою кількістю мигдалевого франжипану всередині.</p>
+                    <div class="product-meta">
+                        <span class="product-price">75 грн</span>
+                        <button class="btn" onclick="openOrder('Мигдалевий Круасан', 75)">Купити</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3 class="product-title">Какао з маршмелоу</h3>
+                    <p class="product-desc">Справжній бельгійський шоколад, незбиране молоко та жменя ніжних хмаринок маршмелоу для настрою. 300 мл.</p>
+                    <div class="product-meta">
+                        <span class="product-price">70 грн</span>
+                        <button class="btn" onclick="openOrder('Какао з маршмелоу', 70)">Купити</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container about-section" id="about">
+        <h2 class="section-title">Про «ТЕПЛО»</h2>
+        <div class="about-content">
+            <p>«ТЕПЛО» — це не просто назва, це філософія нашого ставлення до кожного гостя. Ми віримо, що день починається не з кави, а з емоцій, які вона дарує. Наша команда ретельно відбирає зерна, контролює кожен етап заварювання та випікає свіжі десерти щоранку, щоб передати часточку нашої турботи прямо вам у руки.</p>
+        </div>
+    </section>
+
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeOrder()">&times;</span>
+            <h2>Оформлення замовлення</h2>
+            
+            <form id="orderForm" onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label>Позиція</label>
+                    <input type="text" id="modalProduct" readonly style="background-color: #eee; font-weight: bold; border-color: #ccc;">
+                </div>
+
+                <div class="form-group">
+                    <label>Ваше ім'я</label>
+                    <input type="text" required placeholder="Як до вас звертатися">
+                </div>
+
+                <div class="form-group">
+                    <label>Номер телефону</label>
+                    <input type="tel" required placeholder="+380">
+                </div>
+
+                <div class="form-group">
+                    <label>Спосіб отримання</label>
+                    <select id="deliverySelect" onchange="calculateTotal()">
+                        <option value="pickup">Самовивіз із кав'ярні</option>
+                        <option value="delivery">Доставка на адресу (+50 грн)</option>
+                    </select>
+                </div>
+
+                <div class="payment-box">
+                    <div class="payment-title">🔒 Безпечна оплата карткою</div>
+                    <div class="form-group">
+                        <label>Номер картки</label>
+                        <input type="text" pattern="\d{16}" maxlength="16" placeholder="4441 0000 0000 0000" required>
+                    </div>
+                    <div class="card-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Термін дії</label>
+                            <input type="text" pattern="\d{2}/\d{2}" placeholder="ММ/РР" maxlength="5" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>CVC2 / CVV</label>
+                            <input type="password" pattern="\d{3}" placeholder="•••" maxlength="3" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="payButton" style="width: 100%;">Оплатити</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ТЕПЛО Кав'ярня. Усі права захищені.</p>
+            <p style="font-size: 0.85rem; opacity: 0.7;">Графік роботи: щодня з 08:00 до 21:00</p>
+        </div>
+    </footer>
+
+    <script>
+        // Елементи навігації
+        const navMenu = document.getElementById('navMenu');
+        const burgerBtn = document.getElementById('burgerBtn');
+
+        function toggleMenu() {
+            navMenu.classList.toggle('active');
+            burgerBtn.classList.toggle('toggle');
+        }
+
+        function closeMenu() {
+            navMenu.classList.remove('active');
+            burgerBtn.classList.remove('toggle');
+        }
+
+        // Логіка Крамниці / Оплати
+        const modal = document.getElementById('orderModal');
+        const modalProduct = document.getElementById('modalProduct');
+        const deliverySelect = document.getElementById('deliverySelect');
+        const payButton = document.getElementById('payButton');
+
+        let itemPrice = 0;
+        let totalPrice = 0;
+
+        function openOrder(name, price) {
+            itemPrice = price;
+            modalProduct.value = name;
+            calculateTotal();
+            modal.style.display = 'flex';
+        }
+
+        function closeOrder() {
+            modal.style.display = 'none';
+            document.getElementById('orderForm').reset();
+        }
+
+        function calculateTotal() {
+            const isDelivery = deliverySelect.value === 'delivery';
+            totalPrice = itemPrice + (isDelivery ? 50 : 0);
+            payButton.innerText = `Оплатити ${totalPrice} грн`;
+        }
+
+        function processPayment(event) {
+            event.preventDefault();
+            payButton.disabled = true;
+            payButton.innerText = "Обробка платежу...";
+
+            // Імітація відповіді платіжного сервісу (Mono/LiqPay)
+            setTimeout(() => {
+                alert(`✨ Оплата пройшла успішно!\nДякуємо! Напій "${modalProduct.value}" вже готується.\nСума: ${totalPrice} грн.`);
+                payButton.disabled = false;
+                closeOrder();
+            }, 2000);
+        }
+
+        // Закриття модального вікна поза областю контенту
+        window.onclick = function(e) {
+            if (e.target === modal) {
+                closeOrder();
+            }
+        }
+    </script>
+</body>
+</html>
