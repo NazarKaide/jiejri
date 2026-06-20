@@ -812,10 +812,10 @@
 
             setTimeout(() => {
                 alert(
-                    `✨ Сформовано платіж через Monobank!\\n\\n` +
-                    `👤 Клієнт: ${name} (${phone})\\n` +
-                    `💰 До сплати: ${finalTotal} грн\\n` +
-                    `📦 Кількість позицій: ${cart.reduce((sum, i) => sum + i.qty, 0)} шт.\\n\\n` +
+                    `✨ Сформовано платіж через Monobank! \n` +
+                    `👤 Клієнт: ${name} (${phone}) \n` +
+                    `💰 До сплати: ${finalTotal} грн \n` +
+                    `📦 Кількість позицій: ${cart.reduce((sum, i) => sum + i.qty, 0)} шт.\n` +
                     ` `
                 );
                 payButton.disabled = false;
