@@ -66,13 +66,6 @@
             display: block;
         }
 
-        /* Права частина шапки, де кнопка кошика та бургер */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
         .nav-menu {
             display: flex;
             gap: 30px;
@@ -89,31 +82,6 @@
 
         .nav-menu a:hover {
             color: var(--accent);
-        }
-
-        /* 🛒 Іконка кошика в шапці (завжди видима) */
-        .cart-icon-btn {
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-size: 1.3rem;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -7px;
-            right: -10px;
-            background-color: var(--accent);
-            color: var(--white);
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 50%;
-            transition: transform 0.2s;
         }
 
         /* Бургер-меню для мобільних */
@@ -223,25 +191,6 @@
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(43, 66, 49, 0.1);
-        }
-
-        /* Контейнер для зображення в картці */
-        .product-img-wrapper {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            background-color: #eaeaea;
-        }
-
-        .product-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-img-wrapper img {
-            transform: scale(1.06);
         }
 
         .product-info {
@@ -357,65 +306,6 @@
             font-size: 1.6rem;
         }
 
-        /* Список товарів */
-        .cart-list {
-            margin-bottom: 15px;
-            max-height: 180px;
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .item-info h4 {
-            font-size: 1rem;
-            color: var(--primary);
-        }
-
-        .item-info p {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .item-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .qty-btn {
-            background-color: #f0faf2;
-            border: 1px solid #dcdcdc;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .qty-btn:hover { background-color: #e2f3e6; }
-
-        .btn-clear-cart {
-            background: none;
-            border: none;
-            color: #999;
-            font-size: 0.85rem;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        .btn-clear-cart:hover { color: #cc0000; }
-
         .form-group {
             margin-bottom: 15px;
         }
@@ -428,7 +318,7 @@
             color: #444;
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 12px;
             border: 1px solid #dcdcdc;
@@ -439,18 +329,17 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: var(--primary);
         }
 
-        /* Блок оплати Monobank */
+        /* Блок оплати картою */
         .payment-box {
-            background-color: #faf6f0;
+            background-color: #fcfbf9;
             padding: 20px;
             border-radius: 12px;
             border: 1px dashed var(--accent);
             margin: 20px 0;
-            text-align: center;
         }
 
         .payment-title {
@@ -459,30 +348,13 @@
             color: var(--primary);
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
             font-size: 0.95rem;
         }
 
-        .btn-mono {
-            width: 100%;
-            background-color: #000000;
-            color: #ffffff;
-            border: none;
-            padding: 14px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 10px;
-            cursor: pointer;
+        .card-row {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: background-color 0.2s;
-        }
-
-        .btn-mono:hover {
-            background-color: #222222;
+            gap: 15px;
         }
 
         /* --- ПІДВАЛ (FOOTER) --- */
@@ -496,13 +368,19 @@
         footer p { margin-bottom: 10px; }
 
         /* ==========================================================================
-           МЕДІА-ЗАПИТИ
+           МЕДІА-ЗАПИТИ ДЛЯ ПОВНОЇ АДАПТИВНОСТІ (Responsive Design)
            ========================================================================== */
+        
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.6rem; }
+        }
+
         @media (max-width: 768px) {
-            body { padding-top: 60px; }
-            header { height: 60px; }
+            body { padding-top: 60px; header { height: 60px; } }
+            
             .burger { display: flex; }
 
+            /* Перетворення меню на висувну панель на мобільних */
             .nav-menu {
                 position: fixed;
                 top: 60px;
@@ -514,30 +392,32 @@
                 justify-content: center;
                 gap: 40px;
                 transition: 0.4s ease-in-out;
+                box-shadow: inset 0 10px 15px rgba(0,0,0,0.02);
             }
 
-            .nav-menu.active { left: 0; }
-            .nav-menu a { font-size: 1.4rem; }
-            
-            /* Робимо іконку кошика більшою та зручнішою для пальця на мобілках */
-            .cart-icon-btn {
-                font-size: 1.5rem;
+            .nav-menu.active {
+                left: 0;
             }
 
+            .nav-menu a {
+                font-size: 1.4rem;
+            }
+
+            /* Анімація іконки бургера */
             .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
             .burger.toggle .line2 { opacity: 0; }
             .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
             .hero h1 { font-size: 2.1rem; }
+            .hero p { font-size: 1rem; }
             .section-title { font-size: 1.8rem; }
-            
-            .features { padding: 40px 20px; }
-            .products-grid { gap: 20px; }
         }
 
         @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
             .products-grid { grid-template-columns: 1fr; }
-            .product-img-wrapper { height: 200px; }
+            .card-row { flex-direction: column; gap: 0; }
+            .modal-content { padding: 20px; }
         }
     </style>
 </head>
@@ -548,23 +428,16 @@
             <div class="logo">
                 <img src="logo.jpg" alt="ТЕПЛО Лого">
             </div>
-            
             <nav class="nav-menu" id="navMenu">
                 <a href="#menu" onclick="closeMenu()">Меню</a>
                 <a href="#about" onclick="closeMenu()">Про простір</a>
                 <a href="#advantages" onclick="closeMenu()">Чому ми</a>
             </nav>
-
-            <div class="header-actions">
-                <button class="cart-icon-btn" onclick="openCartModal(); closeMenu();">
-                    🛒 <span class="cart-count" id="cartCount">0</span>
-                </button>
-                <button class="burger" id="burgerBtn" onclick="toggleMenu()">
-                    <span class="line1"></span>
-                    <span class="line2"></span>
-                    <span class="line3"></span>
-                </button>
-            </div>
+            <button class="burger" id="burgerBtn" onclick="toggleMenu()">
+                <span class="line1"></span>
+                <span class="line2"></span>
+                <span class="line3"></span>
+            </button>
         </div>
     </header>
 
@@ -579,12 +452,12 @@
     <section class="container features" id="advantages">
         <div class="features-grid">
             <div class="feature-item">
-                <h3>⏰ Без черг та очікування</h3>
-                <p>Оберіть час отримання замовлення, а ми приготуємо все до вашого приходу.</p>
+                <h3>☀️ Завжди гаряче</h3>
+                <p>Пакуємо у спеціальні термоізоляційні холдери, щоб зберегти температуру.</p>
             </div>
             <div class="feature-item">
-                <h3>☕️ Якісна кава в кожній чашці</h3>
-                <p>Використовуємо 100% арабіку та ретельно підібрану кавову суміш.</p>
+                <h3>🌱 100% Арабіка</h3>
+                <p>Використовуємо лише спешелті зерно свіжого локального обсмажування.</p>
             </div>
             <div class="feature-item">
                 <h3>⚡️ Швидка оплата</h3>
@@ -598,57 +471,45 @@
         
         <div class="products-grid">
             <div class="product-card">
-                <div class="product-img-wrapper">
-                    <img src="cappuccino.jpg" alt="Класичний Капучино">
-                </div>
                 <div class="product-info">
                     <h3 class="product-title">Класичний Капучино</h3>
                     <p class="product-desc">Густа оксамитова молочна пінка, подвійний еспресо з нотками шоколаду та горіхів. 300 мл.</p>
                     <div class="product-meta">
                         <span class="product-price">65 грн</span>
-                        <button class="btn" onclick="addToCart('Класичний Капучино', 65)">Купити</button>
+                        <button class="btn" onclick="openOrder('Класичний Капучино', 65)">Купити</button>
                     </div>
                 </div>
             </div>
 
             <div class="product-card">
-                <div class="product-img-wrapper">
-                    <img src="raf.jpg" alt="Фірмовий Раф «Тепло»">
-                </div>
                 <div class="product-info">
                     <h3 class="product-title">Фірмовий Раф «Тепло»</h3>
                     <p class="product-desc">Ніжні збиті вершки, еспресо та наш секретний сироп із додаванням натуральної лаванди. 350 мл.</p>
                     <div class="product-meta">
-                        <span class="product-price">85 грн</span>
-                        <button class="btn" onclick="addToCart('Фірмовий Раф «Тепло»', 85)">Купити</button>
+                        <span class="product-price">85_грн</span>
+                        <button class="btn" onclick="openOrder('Фірмовий Раф «Тепло»', 85)">Купити</button>
                     </div>
                 </div>
             </div>
 
             <div class="product-card">
-                <div class="product-img-wrapper">
-                    <img src="croissant.jpg" alt="Мигдалевий Круасан">
-                </div>
                 <div class="product-info">
                     <h3 class="product-title">Мигдалевий Круасан</h3>
                     <p class="product-desc">Класичний французький круасан на вершковому маслі з великою кількістю мигдалевого франжипану всередині.</p>
                     <div class="product-meta">
                         <span class="product-price">75 грн</span>
-                        <button class="btn" onclick="addToCart('Мигдалевий Круасан', 75)">Купити</button>
+                        <button class="btn" onclick="openOrder('Мигдалевий Круасан', 75)">Купити</button>
                     </div>
                 </div>
             </div>
 
             <div class="product-card">
-                <div class="product-img-wrapper">
-                    <img src="cocoa.jpg" alt="Какао з маршмелоу">
-                </div>
                 <div class="product-info">
                     <h3 class="product-title">Какао з маршмелоу</h3>
                     <p class="product-desc">Справжній бельгійський шоколад, незбиране молоко та жменя ніжних хмаринок маршмелоу для настрою. 300 мл.</p>
                     <div class="product-meta">
                         <span class="product-price">70 грн</span>
-                        <button class="btn" onclick="addToCart('Какао з маршмелоу', 70)">Купити</button>
+                        <button class="btn" onclick="openOrder('Какао з маршмелоу', 70)">Купити</button>
                     </div>
                 </div>
             </div>
@@ -667,26 +528,49 @@
             <span class="close-modal" onclick="closeOrder()">&times;</span>
             <h2>Оформлення замовлення</h2>
             
-            <div class="cart-list" id="cartList"></div>
-            <button class="btn-clear-cart" onclick="clearCart()">🗑 Очистити кошик</button>
-
             <form id="orderForm" onsubmit="processPayment(event)">
                 <div class="form-group">
+                    <label>Позиція</label>
+                    <input type="text" id="modalProduct" readonly style="background-color: #eee; font-weight: bold; border-color: #ccc;">
+                </div>
+
+                <div class="form-group">
                     <label>Ваше ім'я</label>
-                    <input type="text" id="userName" required placeholder="Як до вас звертатися">
+                    <input type="text" required placeholder="Як до вас звертатися">
                 </div>
 
                 <div class="form-group">
                     <label>Номер телефону</label>
-                    <input type="tel" id="userPhone" required placeholder="+380">
+                    <input type="tel" required placeholder="+380">
+                </div>
+
+                <div class="form-group">
+                    <label>Спосіб отримання</label>
+                    <select id="deliverySelect" onchange="calculateTotal()">
+                        <option value="pickup">Самовивіз із кав'ярні</option>
+                        <option value="delivery">Доставка на адресу (+50 грн)</option>
+                    </select>
                 </div>
 
                 <div class="payment-box">
-                    <div class="payment-title">🔒 Безпечна оплата через Monobank</div>
-                    <button type="submit" class="btn-mono" id="payButton">
-                        🖤 Сплатити 0 грн
-                    </button>
+                    <div class="payment-title">🔒 Безпечна оплата карткою</div>
+                    <div class="form-group">
+                        <label>Номер картки</label>
+                        <input type="text" pattern="\d{16}" maxlength="16" placeholder="4441 0000 0000 0000" required>
+                    </div>
+                    <div class="card-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Термін дії</label>
+                            <input type="text" pattern="\d{2}/\d{2}" placeholder="ММ/РР" maxlength="5" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>CVC2 / CVV</label>
+                            <input type="password" pattern="\d{3}" placeholder="•••" maxlength="3" required>
+                        </div>
+                    </div>
                 </div>
+
+                <button type="submit" class="btn" id="payButton" style="width: 100%;">Оплатити</button>
             </form>
         </div>
     </div>
@@ -699,7 +583,7 @@
     </footer>
 
     <script>
-        // Меню
+        // Елементи навігації
         const navMenu = document.getElementById('navMenu');
         const burgerBtn = document.getElementById('burgerBtn');
 
@@ -713,74 +597,19 @@
             burgerBtn.classList.remove('toggle');
         }
 
-        // Кошик
-        let cart = [];
+        // Логіка Крамниці / Оплати
         const modal = document.getElementById('orderModal');
-        const cartList = document.getElementById('cartList');
-        const cartCountBadge = document.getElementById('cartCount');
+        const modalProduct = document.getElementById('modalProduct');
+        const deliverySelect = document.getElementById('deliverySelect');
         const payButton = document.getElementById('payButton');
 
-        function addToCart(name, price) {
-            const existingItem = cart.find(item => item.name === name);
-            if (existingItem) {
-                existingItem.qty += 1;
-            } else {
-                cart.push({ name, price, qty: 1 });
-            }
-            updateCartCount();
-            
-            cartCountBadge.style.transform = 'scale(1.3)';
-            setTimeout(() => cartCountBadge.style.transform = 'scale(1)', 200);
-        }
+        let itemPrice = 0;
+        let totalPrice = 0;
 
-        function changeQty(index, change) {
-            cart[index].qty += change;
-            if (cart[index].qty <= 0) {
-                cart.splice(index, 1);
-            }
-            updateCartModalUI();
-            updateCartCount();
-        }
-
-        function updateCartCount() {
-            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            cartCountBadge.innerText = totalItems;
-        }
-
-        function updateCartModalUI() {
-            if (cart.length === 0) {
-                cartList.innerHTML = `<p style="text-align:center; color:#999; padding: 15px 0;">Кошик порожній ☕️</p>`;
-                calculateTotal();
-                return;
-            }
-
-            let html = '';
-            cart.forEach((item, index) => {
-                html += `
-                    <div class="cart-item">
-                        <div class="item-info">
-                            <h4>${item.name}</h4>
-                            <p>${item.price} грн / шт</p>
-                        </div>
-                        <div class="item-actions">
-                            <button type="button" class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
-                            <span>${item.qty}</span>
-                            <button type="button" class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
-                        </div>
-                    </div>
-                `;
-            });
-            cartList.innerHTML = html;
+        function openOrder(name, price) {
+            itemPrice = price;
+            modalProduct.value = name;
             calculateTotal();
-        }
-
-        function calculateTotal() {
-            const finalTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            payButton.innerText = `Сплатити ${finalTotal} грн`;
-        }
-
-        function openCartModal() {
-            updateCartModalUI();
             modal.style.display = 'flex';
         }
 
@@ -789,41 +618,26 @@
             document.getElementById('orderForm').reset();
         }
 
-        function clearCart() {
-            cart = [];
-            updateCartCount();
-            updateCartModalUI();
+        function calculateTotal() {
+            const isDelivery = deliverySelect.value === 'delivery';
+            totalPrice = itemPrice + (isDelivery ? 50 : 0);
+            payButton.innerText = `Оплатити ${totalPrice} грн`;
         }
 
         function processPayment(event) {
             event.preventDefault();
-            
-            if (cart.length === 0) {
-                alert("Ваш кошик порожній!");
-                return;
-            }
-
-            const name = document.getElementById('userName').value.trim();
-            const phone = document.getElementById('userPhone').value.trim();
-            const finalTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
             payButton.disabled = true;
-            payButton.innerText = "Обробка Monobank інвойсу...";
+            payButton.innerText = "Обробка платежу...";
 
+            // Імітація відповіді платіжного сервісу (Mono/LiqPay)
             setTimeout(() => {
-                alert(
-                    `✨ Сформовано платіж через Monobank!\\n\\n` +
-                    `👤 Клієнт: ${name} (${phone})\\n` +
-                    `💰 До сплати: ${finalTotal} грн\\n` +
-                    `📦 Кількість позицій: ${cart.reduce((sum, i) => sum + i.qty, 0)} шт.\\n\\n` +
-                    ` `
-                );
+                alert(`✨ Оплата пройшла успішно!\nДякуємо! Напій "${modalProduct.value}" вже готується.\nСума: ${totalPrice} грн.`);
                 payButton.disabled = false;
-                clearCart();
                 closeOrder();
             }, 2000);
         }
 
+        // Закриття модального вікна поза областю контенту
         window.onclick = function(e) {
             if (e.target === modal) {
                 closeOrder();
